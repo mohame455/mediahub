@@ -4,3 +4,17 @@ export const setMovies = (value) => {
       value
     };
   };
+
+  export const setMovieDetails = (value) => {
+    return {
+      type: "SET_MOVIE_DETAILS",
+      value
+    };
+  };
+
+  export const setHistorique = (value) => {
+    return {
+      type: "SET_MOVIE_HISTORIQUE",
+      value
+    };
+  };

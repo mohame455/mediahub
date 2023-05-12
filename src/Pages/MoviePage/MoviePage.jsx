@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CardOrganisme from "../../Organisme/CardOrganisme/CardOrganisme";
 import { getMovieDetail } from "../../Api/Movies/MovieApi";
+import { setHistorique, setMovieDetails } from "../../Redux/Actions/movieActions";
 
 const MoviePage = () => {
-  console.log('moviePage')
   const navigate = useNavigate();
+  const dispatch=useDispatch()
   const listMovies = useSelector((state) => state.movies.listMovies);
-  const [movieDetails, setMovieDetails] = useState();
 
   const getMovie = async (id) => {
     const response = await getMovieDetail(id);
     if (response["Title"]) {
-      setMovieDetails(response);
+      dispatch(setMovieDetails(response))
+      dispatch(setHistorique(response))
       navigate(`/movies/${id}`);
     }
   };
@@ -25,7 +26,6 @@ const MoviePage = () => {
           <CardOrganisme
             key={index}
             onClick={() => getMovie(movie.id)}
-            movieDetails={movieDetails}
             movie={movie}
           />
         ))}

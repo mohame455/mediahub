@@ -1,7 +1,6 @@
-// import React from 'react';
-import { Icon, Input, Text } from '../../Atom';
-import PropTypes from 'prop-types';
 import React, { useState} from 'react';
+import { Checkbox, Icon, Input, Text } from '../../Atom';
+import PropTypes from 'prop-types';
 import ClickAwayListener from 'react-click-away-listener';
 const MoleculeInput = props => {
   const [visible, setVisibility] = useState(false);

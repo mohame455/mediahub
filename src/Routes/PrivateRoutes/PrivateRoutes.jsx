@@ -5,7 +5,6 @@ import  NavPage  from '../../Pages/NavPage/NavPage';
 
 
 const PrivateRoute = () => {
-  console.log('privateRoute')
   const accessToken = useSelector(state => state.auth.accessToken);
   
   return accessToken ? (

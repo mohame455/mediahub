@@ -18,9 +18,6 @@ const LoginPage = () => {
     setForm({ ...form, [key]: value });
   };
   const navigate = useNavigate();
-  // const goTo = path => {
-  //   navigate(path);
-  // };
   const validate = async () => {
     let aux = {
       isInvalid: false,

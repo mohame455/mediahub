@@ -1,98 +1,70 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getAllMovies } from "../../Api/Movies/MovieApi";
-import { Button } from "../../Atom";
+import { Button, Img } from "../../Atom";
 import { Input } from "../../Molecule";
 import { logOut } from "../../Redux/Actions/authActions";
 import { setMovies } from "../../Redux/Actions/movieActions";
+import mediahub from '../../assets/image/mediahub.jpg';
 
 const NavPage = () => {
-  console.log('navBar')
   const dispatch = useDispatch();
+  const navigate=useNavigate()
   const [form, setForm] = useState({ title: "", sortBy: "" });
 
-  // const getMovies = async () => {
-  //   const res = await getAllMovies(form.title, form.sortBy);
-
-  //   if (res.length) {
-  //     dispatch(setMovies(res));
-  //     if (form.title || form.sortBy) {
-  //       setForm({ title: "", sortBy: "" });
-  //     }
-  //   }
-  // };
+  const getMovies = async () => {
+    const res = await getAllMovies(form.title, form.sortBy);
+    
+    if (res.length) {
+      dispatch(setMovies(res));
+      if (form.title || form.sortBy) {
+        setForm({ ...form, title: "", sortBy: "" });
+      }
+      navigate('/movies')
+    }
+  };
 
   const onChange = (value, key) => {
     setForm({ ...form, [key]: value });
   };
-  // useEffect(() => {
-  //   getMovies()
-  // }, [])
-
   useEffect(() => {
-    const getMovies = async () => {
-      const res = await getAllMovies(form.title, form.sortBy);
-  
-      if (res.length) {
-        dispatch(setMovies(res));
-        if (form.title || form.sortBy) {
-          setForm({ title: "", sortBy: "" });
-        }
-      }
-    };
-  
     getMovies();
   }, []);
-  
-
-  // const handleClick=useCallback(() => {
-  //   getMovies();
-  // }, []);
-
-  // useEffect(() => {
-  //   handleClick()
-  // }, [handleClick])
-
-  // const memoizedFunction = useCallback(() => {
-  //   getMovies();
-  //   console.log('Running effect with memoized function');
-  // }, []);
-
-  // useEffect(() => {
-  //   memoizedFunction();
-  // }, [memoizedFunction]);
 
 
   return (
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">React Bootstrap</Navbar.Brand>
+        <Img
+        src={mediahub}
+        width='321px'
+        height='150px'
+        className='logo-media'
+        onClick={getMovies}
+      />
+          <Navbar.Brand href="#home" onClick={()=>navigate('/movies/historique')} >Historique</Navbar.Brand>
         </Container>
         <Input
           placeholder={"title"}
           value={form.title}
           onChange={(e) => onChange(e.target.value, "title")}
         />
-        {/* <Input
-          placeholder={"sortBy"}
-          value={form.sortBy}
-          onChange={(e) => onChange(e.target.value, "sortBy")}
-        /> */}
         <Input
-              size="medium"
-              as="select"
-              options={[
-                { value: 'test1', text: 'Texte1' },
-                { value: 'test2', text: 'Texte2' },
-                { value: 'test3', text: 'Texte3' },
-                { value: 'test4', text: 'Texte4' }
-              ]}
-              onChange={(value) => console.log('value : ', value)}
-              multipleSelect={true}
-            />
-        <Button text={"search"} />
+          size="medium"
+          as="select"
+          value={form.sortBy}
+          options={[
+            { value: "Rotten Tomatoes Rating", text: "Rotten Tomatoes Rating" },
+            { value: "IMDB Rating", text: "IMDB Rating" },
+            { value: "IMDB Votes", text: "IMDB Votes" },
+          ]}
+          onChange={(value) => setForm({ ...form, sortBy: value })}
+          multipleSelect={false}
+        />
+        <Button text={"search"} onClick={getMovies} />
         <Button text={"se deconnecter"} onClick={() => dispatch(logOut())} />
       </Navbar>
     </>

@@ -44,7 +44,10 @@ AtomInput.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.any,
   readOnly: PropTypes.bool,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   bsPrefix: PropTypes.string,
   id: PropTypes.any,
   placeholder: PropTypes.string,

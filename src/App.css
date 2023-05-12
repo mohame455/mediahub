@@ -4,3 +4,105 @@
   border-radius: 20px;
   box-shadow: 2px 2px grey;
 }
+
+.container-generic-input {
+  position: relative;
+  width: max-content;
+}
+
+.padding-input-icon {
+  padding-left: 32px;
+}
+
+.checkbox-input-select {
+  margin-left: 14px;
+}
+
+.default-option-input-select {
+  margin: 10px 12px;
+  cursor: pointer;
+}
+
+.container-option-input-select {
+  min-height: 40px;
+  max-height: 119px;
+  overflow-y: auto;
+  background-color: white;
+  transition: opacity 0.2s linear, visibility 0.2s linear;
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  box-shadow: 0px 2px 20px rgba(0,0,0, 0.1);
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.default-medium-input {
+  width: 240px;
+}
+
+.default-small-input {
+  width: 161px;
+}
+
+.default-large-input {
+  width: 338px;
+}
+
+.input-select {
+  padding-left: 12px;
+  padding-right: 36px;
+  position: relative;
+}
+
+.icon-input-select {
+  position: absolute;
+  top: 18px;
+  right: 19px;
+  color: black;
+  transform: rotate(180deg);
+}
+
+.icon-input-select-open {
+  transform: rotate(360deg);
+}
+
+.container-check {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: max-content;
+}
+
+.container-check .form-control {
+  background-color: blue;
+  height: 12px;
+  width: 12px;
+}
+
+.custom-control-label::before {
+  display: block;
+  width: 12px;
+  height: 12px;
+}
+
+.custom-control-label::after {
+  width: 12px;
+  height: 12px;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::after {
+  background-color: blue;
+  width: 12px;
+  height: 12px;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 0px;
+}
+
+.logo-media{
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
