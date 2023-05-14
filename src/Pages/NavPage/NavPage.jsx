@@ -7,22 +7,31 @@ import { Button, Img } from "../../Atom";
 import { Input } from "../../Molecule";
 import { logOut } from "../../Redux/Actions/authActions";
 import { setMovies } from "../../Redux/Actions/movieActions";
-import mediahub from '../../assets/image/mediahub.jpg';
+import mediahub from "../../assets/image/mediahub.jpg";
+var lastSearchTime = 0;
 
 const NavPage = () => {
   const dispatch = useDispatch();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [form, setForm] = useState({ title: "", sortBy: "" });
-
   const getMovies = async () => {
-    const res = await getAllMovies(form.title, form.sortBy);
-    
+    const currentTime = new Date().getTime();
+    let timeSinceLastSearch = currentTime - lastSearchTime;
+    let res = [];
+    if (timeSinceLastSearch >= 1000) {
+      await setTimeout(2000);
+      res = await getAllMovies(form.title, form.sortBy);
+      lastSearchTime = currentTime;
+    }else{
+      return alert('Too Many Requests')
+    }
+
     if (res.length) {
       dispatch(setMovies(res));
       if (form.title || form.sortBy) {
         setForm({ ...form, title: "", sortBy: "" });
       }
-      navigate('/movies')
+      navigate("/movies");
     }
   };
 
@@ -33,19 +42,23 @@ const NavPage = () => {
     getMovies();
   }, []);
 
-
   return (
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-        <Img
-        src={mediahub}
-        width='321px'
-        height='150px'
-        className='logo-media'
-        onClick={getMovies}
-      />
-          <Navbar.Brand href="#home" onClick={()=>navigate('/movies/historique')} >Historique</Navbar.Brand>
+          <Img
+            src={mediahub}
+            width="321px"
+            height="150px"
+            className="logo-media"
+            onClick={getMovies}
+          />
+          <Navbar.Brand
+            href="#home"
+            onClick={() => navigate("/movies/historique")}
+          >
+            Historique
+          </Navbar.Brand>
         </Container>
         <Input
           placeholder={"title"}
