@@ -106,3 +106,34 @@
   height: 60px;
   cursor: pointer;
 }
+
+.default-btn {
+  background: blue;
+  box-shadow: 0px 0px 10px rbga(0,0,0, 0.1);
+  border-radius: 6px;
+  border: none;
+}
+
+.default-btn-primary {
+  background-color: grey;
+  color: white;
+  border-color: white;
+  height: 45px;
+  width: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.default-btn-secondary{
+  background-color: blue;
+  color: white;
+  border-color: white;
+  height: 45px;
+  width: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.invalid-input {
+  border: 1px solid red !important;
+}

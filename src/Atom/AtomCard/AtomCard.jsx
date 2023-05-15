@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 function AtomCard (props) {
   return (
-    <div onClick={props.onClick} className={`card-container ${props.className} `}>{props.children}</div>
+    <div data-testid='card' onClick={props.onClick} className={`card-container ${props.className} `}>{props.children}</div>
   );
 }
 

@@ -3,6 +3,7 @@ import { Checkbox, Icon, Input, Text } from '../../Atom';
 import PropTypes from 'prop-types';
 import ClickAwayListener from 'react-click-away-listener';
 const MoleculeInput = props => {
+  console.log(props.errorMsg)
   const [visible, setVisibility] = useState(false);
   const [value, setValue] = useState([]);
   const [filter, setFilter] = useState('');
@@ -202,11 +203,11 @@ MoleculeInput.defaultProps = {
   className: '',
   onChange: null,
   readOnly: false,
-  value: '',
+  value: undefined,
   bsPrefix: null,
   id: null,
   placeholder: 'Texte',
-  defaultValue: '',
+  defaultValue: undefined,
   feedback: false,
   feedbackTooltip: false,
   password: false,

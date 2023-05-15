@@ -10,7 +10,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector(state => state.auth.accessToken);
   const [form, setForm] = useState({ username: "", password: "" });
-  const [valid, setValid] = useState({
+  const [error, setError] = useState({
     isInvalid: false,
     errorMsg: "",
   });
@@ -28,19 +28,21 @@ const LoginPage = () => {
         isInvalid: true,
         errorMsg: "Ce champ est obligatoire. ",
       };
+    }else{
+      const response = await apiLogin(form.username, form.password);
+      if (response.token) {
+        dispatch(setToken(response.token));
+        navigate("/movies");
+      } else {
+        aux = {
+          isInvalid: true,
+          errorMsg: "Bad Credentials. ",
+        };
+      }
+      
     }
-
-    const response = await apiLogin(form.username, form.password);
-    if (response.token) {
-      dispatch(setToken(response.token));
-      navigate("/movies");
-    } else {
-      aux = {
-        isInvalid: true,
-        errorMsg: "Bad Credentials. ",
-      };
-    }
-    setValid(aux);
+    setError(aux);
+    
   };
   if(accessToken){
     return <Navigate to='/movies' />
@@ -50,10 +52,17 @@ const LoginPage = () => {
       <Input
         inputLabel={"username"}
         onChange={(e) => onChange(e.target.value, "username")}
+        value={form.username}
+        errorMsg={error.errorMsg}
+        isInvalid={error.isInvalid}
       />
       <Input
         inputLabel={"password"}
         onChange={(e) => onChange(e.target.value, "password")}
+        password={true}
+        value={form.password}
+        errorMsg={error.errorMsg}
+        isInvalid={error.isInvalid}
       />
       <Button text={"se connecter"} onClick={validate} />
     </div>

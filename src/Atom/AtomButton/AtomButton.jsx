@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
-import './AtomButton.css'
 
 function AtomButton(props) {
   let className = "";
