@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "../../Molecule";
 import { Navigate, useNavigate } from "react-router";
-import { Button } from "../../Atom";
+import { Button, Card } from "../../Atom";
 import { apiLogin } from "../../Api/Login/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../Redux/Actions/authActions";
@@ -48,7 +48,7 @@ const LoginPage = () => {
     return <Navigate to='/movies' />
   }
   return (
-    <div>
+    <Card className='LoginPage-container'>
       <Input
         inputLabel={"username"}
         onChange={(e) => onChange(e.target.value, "username")}
@@ -65,7 +65,7 @@ const LoginPage = () => {
         isInvalid={error.isInvalid}
       />
       <Button text={"se connecter"} onClick={validate} />
-    </div>
+    </Card>
   );
 };
 

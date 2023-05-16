@@ -137,3 +137,44 @@
 .invalid-input {
   border: 1px solid red !important;
 }
+
+.LoginPage-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+  margin: auto;
+  height: 300px;
+  margin-top: 150px;
+}
+
+.NavPage-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: grey;
+  height: 80px;
+}
+.NavPage-container-img-historique{
+  display: flex;
+  width: 15%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.NavPage-container-search{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btn-NavePage{
+  border: 1px solid white; 
+}
+
+.NavPage-historique-text{
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}

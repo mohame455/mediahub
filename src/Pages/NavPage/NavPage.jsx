@@ -3,7 +3,7 @@ import { Navbar, Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllMovies } from "../../Api/Movies/MovieApi";
-import { Button, Img } from "../../Atom";
+import { Button, Img, Text } from "../../Atom";
 import { Input } from "../../Molecule";
 import { logOut } from "../../Redux/Actions/authActions";
 import { setMovies } from "../../Redux/Actions/movieActions";
@@ -22,8 +22,8 @@ const NavPage = () => {
       await setTimeout(2000);
       res = await getAllMovies(form.title, form.sortBy);
       lastSearchTime = currentTime;
-    }else{
-      return alert('Too Many Requests')
+    } else {
+      return alert("Too Many Requests");
     }
 
     if (res.length) {
@@ -43,23 +43,22 @@ const NavPage = () => {
   }, []);
 
   return (
-    <>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Img
-            src={mediahub}
-            width="321px"
-            height="150px"
-            className="logo-media"
-            onClick={getMovies}
-          />
-          <Navbar.Brand
-            href="#home"
-            onClick={() => navigate("/movies/historique")}
-          >
-            Historique
-          </Navbar.Brand>
-        </Container>
+    <div className="NavPage-container" >
+    <div className="NavPage-container-img-historique">
+      <Img
+        src={mediahub}
+        width="321px"
+        height="150px"
+        className="logo-media"
+        onClick={getMovies}
+      />
+        <Text
+          text={"Historique"}
+          onClick={() => navigate("/movies/historique")}
+          className={'NavPage-historique-text'}
+        />
+        </div>
+        <div className="NavPage-container-search">
         <Input
           placeholder={"title"}
           value={form.title}
@@ -77,10 +76,10 @@ const NavPage = () => {
           onChange={(value) => setForm({ ...form, sortBy: value })}
           multipleSelect={false}
         />
-        <Button text={"search"} onClick={getMovies} />
-        <Button text={"se deconnecter"} onClick={() => dispatch(logOut())} />
-      </Navbar>
-    </>
+        <Button text={"search"} onClick={getMovies} className={'btn-NavePage'} />
+        </div>
+        <Button text={"se deconnecter"} className={'btn-NavePage'} onClick={() => dispatch(logOut())} />
+    </div>
   );
 };
 
