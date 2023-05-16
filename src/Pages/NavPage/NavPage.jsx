@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllMovies } from "../../Api/Movies/MovieApi";
